@@ -1,6 +1,6 @@
 # TO00BS65-3001
 
-## Project 3 `(API)`
+## Project 4 `(FullStack with React)`
 
 This application was written for the course `Full Stack Development TO00BS65-3001` at Laurea.
 
