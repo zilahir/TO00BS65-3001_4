@@ -32,8 +32,23 @@ services:
       - ./src:/usr/app/src
     networks:
       - app-network
+      - private
     ports:
       - "9009:9009"
+  frontend:
+    build:
+      context: frontend
+      target: development
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/src:/code/src
+      - /code/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - api-server
+
 
 volumes:
   db-data:
@@ -41,3 +56,4 @@ volumes:
 networks:
   app-network:
     driver: bridge
+  private:
