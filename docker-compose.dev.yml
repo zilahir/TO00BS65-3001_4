@@ -3,7 +3,7 @@ version: "3"
 services:
   api-mongo:
     image: mongo:5.0.6
-    container_name: mongo-dev
+    container_name: mongo_to00bs65_3001_4
     restart: always
     networks:
       - app-network
@@ -18,7 +18,7 @@ services:
       context: .
       dockerfile: ./local.Dockerfile
     command: yarn run dev-server
-    container_name: api-server
+    container_name: api_to00bs65_3001_4
     image: api-server
     restart: unless-stopped
     environment:
@@ -39,6 +39,7 @@ services:
     build:
       context: frontend
       target: development
+    container_name: frontend_to00bs65_3001_4
     ports:
       - 3000:3000
     volumes:
