@@ -3,6 +3,10 @@ FROM node:16.14.2 as base
 ENV WORKDIR=/usr/app
 WORKDIR ${WORKDIR}
 
+ARG NODE_ENV=development
+ENV NODE_ENV=$NODE_ENV
+
+
 # Add package file
 COPY package.json $WORKDIR/package.json
 COPY yarn.lock $WORKDIR/yarn.lock
@@ -15,12 +19,7 @@ RUN yarn install
 COPY src $WORKDIR/src
 COPY tsconfig.json $WORKDIR/tsconfig.json
 COPY openapi.json $WORKDIR/openapi.json
-
-# Build dist
-RUN yarn build
-
-ENV NODE_PATH=/usr/app/node_modules
-VOLUME ${NODE_PATH}
+COPY nodemon.json $WORKDIR/nodemon.json
 
 # Copy node modules and build directory
 # COPY ./node_modules /usr/app/node_modules
@@ -28,6 +27,9 @@ COPY . /usr/app/
 
 # Copy static files
 # COPY src/public dist/src/public
+
+ENV NODE_PATH=/usr/app/node_modules
+VOLUME ${NODE_PATH}
 
 EXPOSE 9009
 CMD ["dist/src/server.js"]
