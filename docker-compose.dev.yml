@@ -41,7 +41,7 @@ services:
       target: development
     container_name: frontend_to00bs65_3001_4
     ports:
-      - 3000:3000
+      - 30014:30014
     volumes:
       - ./frontend/src:/code/src
       - /code/node_modules
