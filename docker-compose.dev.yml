@@ -15,8 +15,7 @@ services:
     build:
       args:
           - NODE_ENV=development
-      context: .
-      dockerfile: ./local.Dockerfile
+      context: backend
     command: yarn run dev-server
     container_name: api_to00bs65_3001_4
     image: api-server
@@ -28,8 +27,8 @@ services:
       - MONGO_URL=mongodb://host.docker.internal:27017/api
     volumes:
       - /usr/app/node_modules
-      - ./logs:/logs
-      - ./src:/usr/app/src
+      - ./backend/logs:/logs
+      - ./backend/src:/usr/app/src
     networks:
       - app-network
       - private

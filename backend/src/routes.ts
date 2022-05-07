@@ -19,6 +19,7 @@ router.delete('/api/book/id/:bookId', [BookController.remove]);
 
 // Dev routes
 if (process.env.NODE_ENV === 'development') {
+  router.get('/test', (req, res) => {res.status(200).send('OK')});
   router.use('/dev/api-docs', swaggerUi.serve);
   router.get('/dev/api-docs', swaggerUi.setup(apiSpec, swaggerUiOptions));
 }
