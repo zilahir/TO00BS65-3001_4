@@ -23,7 +23,7 @@ services:
     environment:
       - NODE_ENV=development
       - NODE_PATH=${NODE_PATH}
-      - PORT=9009
+      - PORT=30014
       - MONGO_URL=mongodb://host.docker.internal:27017/api
     volumes:
       - /usr/app/node_modules
@@ -35,14 +35,14 @@ services:
       - app-network
       - private
     ports:
-      - "9009:9009"
+      - 30014:30014
   frontend:
     build:
       context: frontend
       target: development
     container_name: frontend_to00bs65_3001_4
     ports:
-      - 30014:30014
+      - 9000:9000
     volumes:
       - ./frontend/src:/code/src
       - /code/node_modules

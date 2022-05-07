@@ -31,5 +31,5 @@ COPY . /usr/app/
 ENV NODE_PATH=/usr/app/node_modules
 VOLUME ${NODE_PATH}
 
-EXPOSE 9009
+EXPOSE 30014
 CMD ["dist/src/server.js"]
