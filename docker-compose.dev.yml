@@ -34,6 +34,7 @@ services:
     networks:
       - app-network
       - private
+      - public
     ports:
       - 30014:30014
   frontend:
@@ -47,6 +48,7 @@ services:
       - ./frontend/src:/code/src
       - /code/node_modules
     networks:
+      - public
       - app-network
     depends_on:
       - api-server
@@ -59,3 +61,4 @@ networks:
   app-network:
     driver: bridge
   private:
+  public:
