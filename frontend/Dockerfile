@@ -17,6 +17,9 @@ FROM development AS builder
 
 RUN npm run build
 
+ENV NODE_PATH /code/node_modules
+VOLUME ${NODE_PATH}
+
 FROM nginx:1.13-alpine
 
 COPY --from=builder /code/build /usr/share/nginx/html
