@@ -9,13 +9,15 @@ import TopHeader from './components/common/TopHeader';
 import { menuItems } from './fakeApi'
 
 function App() {
+
+  const menu = menuItems.getAllRoutes()
   return (
     <BrowserRouter>
       <TopHeader />
       <Routes>
         {
-          menuItems.map(({path, component: Component}) => (
-          <Route path={path} element={<Component />} />
+          menu.map(({path, component: Component}) => (
+            <Route path={path} element={<Component />} />
           ))
         }
       </Routes>
