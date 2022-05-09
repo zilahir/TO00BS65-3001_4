@@ -10,5 +10,26 @@
     ul {
         display: flex;
         column-gap: 10px;
+
+        li {
+            position: relative;
+
+            &.activeMenuItem {
+                &:after {
+                    position: absolute;
+                    content: '';
+                    width: 100%;
+                    left: 0;
+                    bottom: -10px;
+                    height: 4px;
+                    background: rgba($color: $text-default, $alpha: 1.0)
+                }
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: $text-default;
+        }
     }
 }
