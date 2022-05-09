@@ -6,10 +6,12 @@ import Input from "../../../../components/common/Input/Input";
 import useApi from '../../../../api/useApi';
 import styles from './Form.module.scss';
 import { apiEndpoints } from '../../../../api/apiEndpoints';
+import Error from '../../../../components/common/Error';
 
 function NewBookForm(): ReactElement {
     const [author, setAuthor] = useState<string>("")
     const [title, setTitle] = useState<string>("")
+    const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
     const { response, isLoading, fetch } = useApi(apiEndpoints.insertNewBook, {
         method: "POST",
         data: {
@@ -24,43 +26,50 @@ function NewBookForm(): ReactElement {
           }
     });
 
-    function handleNewBeekAdd() {
-        console.log('errors', errors)
-        // fetch()
+    function handleNewBookkAdd() {
+        if (Object.keys(errors).length === 0) {
+            fetch()
+        }
     }
     return (
-        <form onSubmit={handleSubmit(() => handleNewBeekAdd())} className={styles.formContainer}>
-            <Controller
-                control={control}
-                name="author"
-                rules={{required: true}}
-                render={({field}) => (
-                    <Input
-                        classNames={[styles.inputContainer]}
-                        placeHolder="Author"
-                        onChangeHandler={(author: string) => setAuthor(author)}
-                        {...field}
-                    />
-                )}
-            />
-            <Controller
-                control={control}
-                name="title"
-                rules={{required: true}}
-                render={({field}) => (
-                    <Input
-                        classNames={[styles.inputContainer]}
-                        placeHolder="Title"
-                        onChangeHandler={(title: string) => setTitle(title)}
-                        {...field}
-                    />
-                )}
-            />
+        <form onSubmit={handleSubmit(() => handleNewBookkAdd())} className={styles.formContainer}>
+            <div>
+                {errors && errors.author && <Error message="This field is required" />}
+                <Controller
+                    control={control}
+                    name="author"
+                    rules={{required: true}}
+                    render={({field}) => (
+                        <Input
+                            classNames={[styles.inputContainer]}
+                            placeHolder="Author"
+                            onChangeHandler={(author: string) => setAuthor(author)}
+                            {...field}
+                        />
+                    )}
+                />
+            </div>
+            <div>
+                {errors && errors.title && <Error message="This field is required" />}
+                <Controller
+                    control={control}
+                    name="title"
+                    rules={{required: true}}
+                    render={({field}) => (
+                        <Input
+                            classNames={[styles.inputContainer]}
+                            placeHolder="Title"
+                            onChangeHandler={(title: string) => setTitle(title)}
+                            {...field}
+                        />
+                    )}
+                />
+            </div>
             <Button
                 variant="success"
                 type="submit"
                 label="Save new book"
-                onClickHandler={() => handleNewBeekAdd()}
+                onClickHandler={() => handleNewBookkAdd()}
             />
         </form>
     )

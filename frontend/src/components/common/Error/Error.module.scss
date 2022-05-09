@@ -1,0 +1,11 @@
+@import '../../../styles/variables';
+
+.errorContainer {
+    display: flex;
+    align-items: center;
+    padding: 10px 8px;
+    background: rgba($color: $error-red, $alpha: 1.0);
+    width: fit-content;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
