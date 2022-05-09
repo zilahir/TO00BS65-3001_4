@@ -1,0 +1,16 @@
+@import "../../styles/variables";
+
+.infoContainer {
+    background: rgba($color: $gray-2, $alpha: 0.6);
+    padding: 10px 20px;
+    width: 100%;
+
+    .meta {
+        span {
+            &:first-of-type {
+                font-weight: 600;
+                margin-right: 10px;
+            }
+        }
+    }
+}

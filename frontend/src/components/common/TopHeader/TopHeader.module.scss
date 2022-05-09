@@ -1,0 +1,14 @@
+@import '../../../styles/variables';
+
+.topHeaderRootContainer {
+    background: rgba($color: $gray-1, $alpha: 1.0);
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    ul {
+        display: flex;
+        column-gap: 10px;
+    }
+}
