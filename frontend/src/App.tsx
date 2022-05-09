@@ -17,7 +17,7 @@ function App() {
       <Routes>
         {
           menu.map(({path, component: Component}) => (
-            <Route path={path} element={<Component />} />
+            <Route key={path} path={path} element={<Component />} />
           ))
         }
       </Routes>

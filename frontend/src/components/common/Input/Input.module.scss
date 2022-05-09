@@ -1,3 +1,19 @@
+@import '../../../styles/variables';
+
 .inputContainer {
-    background: red;
+    display: flex;
+    input {
+        height: 40px;
+        font-size: 20px;
+        border-radius: 5px;
+        border: 1px solid rgba($color: $gray-1, $alpha: 1.0);
+        transition: all 0.2s ease;
+        &:focus {
+            outline: none;
+        }
+
+        &:hover, &:focus {
+            background: rgba($color: $gray-1, $alpha: 0.8);
+        }
+    }
 }
