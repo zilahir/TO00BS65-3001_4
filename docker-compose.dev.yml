@@ -6,7 +6,7 @@ services:
     container_name: mongo_to00bs65_3001_4
     restart: always
     networks:
-      - app-network
+      - private
     volumes:
       - db-data:/data/db
     ports:
@@ -31,7 +31,6 @@ services:
       - ./backend/package.json:/usr/app/package.json
       - ./backend/package-lock.json:/usr/app/package-lock.json
     networks:
-      - app-network
       - private
       - public
     ports:
@@ -48,7 +47,6 @@ services:
       - /code/node_modules/
     networks:
       - public
-      - app-network
     depends_on:
       - api-server
 
@@ -57,7 +55,5 @@ volumes:
   db-data:
 
 networks:
-  app-network:
-    driver: bridge
   private:
   public:

@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "http://localhost:30014",
+      target: "http://host.docker.internal:30014/api",
       pathRewrite: { "^/api": "" },
     }),
   );

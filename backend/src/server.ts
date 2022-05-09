@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 30014;
 
 let debugCallback;
 if (process.env.NODE_ENV === 'development') {
-  debugCallback = (collectionName: string, method: string, query: any, doc: string): void => {
+  debugCallback = (collectionName: string, method: string, query: any): void => {
     const message = `${collectionName}.${method}(${util.inspect(query, { colors: true, depth: null })})`;
     logger.log({
       level: 'verbose',

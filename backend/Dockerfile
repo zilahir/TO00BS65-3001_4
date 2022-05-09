@@ -3,6 +3,8 @@ FROM node:16.14.2 as base
 ENV WORKDIR=/usr/app
 WORKDIR ${WORKDIR}
 
+ARG PORT=80
+
 ARG NODE_ENV=development
 ENV NODE_ENV=$NODE_ENV
 
@@ -31,5 +33,5 @@ COPY . /usr/app/
 ENV NODE_PATH=/usr/app/node_modules
 VOLUME ${NODE_PATH}
 
-EXPOSE 30014
+EXPOSE $PORT 30014
 CMD ["dist/src/server.js"]
