@@ -4,21 +4,22 @@ import classnames from 'classnames';
 import styles from './Input.module.scss';
 
 type InputType = "text"
-
+type State = "normal" | "error"
 interface IInput {
     placeHolder: string,
     type?: InputType,
     value: string | undefined,
     onChangeHandler: (event: string) => void,
     classNames?: string[],
+    state?: State
 }
 
-function Input({ placeHolder, type, value, onChangeHandler, classNames = [], ...rest}: IInput, ref: any): ReactElement {
+function Input({ placeHolder, type, value, onChangeHandler, classNames = [], state = "normal", ...rest}: IInput, ref: any): ReactElement {
     return (
         <div className={styles.inputContainer}>
             <input
                 ref={ref}
-                className={classnames(...classNames)}
+                className={classnames([styles[state], ...classNames])}
                 type={type}
                 placeholder={placeHolder}
                 value={value}

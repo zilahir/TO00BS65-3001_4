@@ -43,6 +43,7 @@ function NewBookForm(): ReactElement {
                         <Input
                             classNames={[styles.inputContainer]}
                             placeHolder="Author"
+                            state={errors && errors.author ? "error" : "normal"}
                             onChangeHandler={(author: string) => setAuthor(author)}
                             {...field}
                         />
@@ -59,6 +60,7 @@ function NewBookForm(): ReactElement {
                         <Input
                             classNames={[styles.inputContainer]}
                             placeHolder="Title"
+                            state={errors && errors.title ? "error" : "normal"}
                             onChangeHandler={(title: string) => setTitle(title)}
                             {...field}
                         />
