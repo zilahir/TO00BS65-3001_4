@@ -1,15 +1,38 @@
 @import "../../styles/variables";
 
 .infoContainer {
-    background: rgba($color: $gray-2, $alpha: 0.6);
     padding: 10px 20px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .basicInfo {
+        background: rgba($color: $gray-2, $alpha: 0.4);
+        border-bottom: 4px solid rgba($color: $gray-2, $alpha: 1);
+    }
 
     .meta {
+        padding: 4px 8px;
         span {
+            font-size: 20px;
             &:first-of-type {
                 font-weight: 600;
                 margin-right: 10px;
+            }
+        }
+    }
+
+    .prevAssignMents {
+        .singlePreviousAssignment {
+            display: flex;
+            padding: 4px 8px;
+            p {
+                font-size: 20px;
+                &:first-of-type {
+                    margin-right: 10px;
+                    font-weight: 600;
+                }
             }
         }
     }
