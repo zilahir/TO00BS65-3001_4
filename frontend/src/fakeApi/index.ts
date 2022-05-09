@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 
 import Home from '../pages/Home'
 import Books from '../pages/Books'
-import NewBook from '../pages/NewPage'
+import NewBook from '../pages/NewBook'
 
 interface IMenuItem {
     path: string,
