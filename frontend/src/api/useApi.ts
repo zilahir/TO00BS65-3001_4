@@ -21,20 +21,24 @@ function useApi(url: string, config = {}, initialFetch = true) {
       const source = CancelToken.source();
 
       function fetch() {
-        axiosInstance(url, {
-          ...config,
-          cancelToken: source.token
-        })
-          .then(response => {
-            setState({ error: undefined, response, isLoading: false });
+        return new Promise((resolve, reject) => {
+          axiosInstance(url, {
+            ...config,
+            cancelToken: source.token
           })
-          .catch(error => {
-            if (axios.isCancel(error)) {
-              console.log('Request canceled by cleanup: ', error.message);
-            } else {
-              setState({ error, response: undefined, isLoading: false });
-            }
-          });
+            .then(response => {
+              setState({ error: undefined, response, isLoading: false });
+              resolve(response)
+            })
+            .catch(error => {
+              if (axios.isCancel(error)) {
+                console.log('Request canceled by cleanup: ', error.message);
+              } else {
+                setState({ error, response: undefined, isLoading: false });
+              }
+              reject(error)
+            });
+        })
       }
 
       useEffect(() => {

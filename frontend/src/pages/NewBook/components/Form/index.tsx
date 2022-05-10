@@ -7,11 +7,14 @@ import useApi from '../../../../api/useApi';
 import styles from './Form.module.scss';
 import { apiEndpoints } from '../../../../api/apiEndpoints';
 import Error from '../../../../components/common/Error';
+import SuccessNotification from '../../../../components/common/SuccessNotification';
+import { en } from '../../../../i18n/en';
+import { ERROR, NORMAL } from '../../../../utils/consts';
 
 function NewBookForm(): ReactElement {
     const [author, setAuthor] = useState<string>("")
     const [title, setTitle] = useState<string>("")
-    const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+    const [isSuccess, setIsSuccess] = useState<boolean>(false);
     const { response, isLoading, fetch } = useApi(apiEndpoints.insertNewBook, {
         method: "POST",
         data: {
@@ -26,15 +29,17 @@ function NewBookForm(): ReactElement {
           }
     });
 
-    function handleNewBookkAdd() {
+    async function handleNewBookkAdd() {
         if (Object.keys(errors).length === 0) {
-            fetch()
+            await fetch();
+            setIsSuccess(true)
         }
     }
     return (
         <form onSubmit={handleSubmit(() => handleNewBookkAdd())} className={styles.formContainer}>
             <div>
-                {errors && errors.author && <Error message="This field is required" />}
+                {errors && errors.author && <Error message={en.newBook.requiredField} />}
+                {isSuccess && <SuccessNotification messages={[...en.newBook.successMessages]} />}
                 <Controller
                     control={control}
                     name="author"
@@ -42,8 +47,8 @@ function NewBookForm(): ReactElement {
                     render={({field}) => (
                         <Input
                             classNames={[styles.inputContainer]}
-                            placeHolder="Author"
-                            state={errors && errors.author ? "error" : "normal"}
+                            placeHolder={en.book.author}
+                            state={errors && errors.author ? ERROR : NORMAL}
                             onChangeHandler={(author: string) => setAuthor(author)}
                             {...field}
                         />
@@ -51,7 +56,7 @@ function NewBookForm(): ReactElement {
                 />
             </div>
             <div>
-                {errors && errors.title && <Error message="This field is required" />}
+                {errors && errors.title && <Error message={en.newBook.requiredField} />}
                 <Controller
                     control={control}
                     name="title"
@@ -59,8 +64,8 @@ function NewBookForm(): ReactElement {
                     render={({field}) => (
                         <Input
                             classNames={[styles.inputContainer]}
-                            placeHolder="Title"
-                            state={errors && errors.title ? "error" : "normal"}
+                            placeHolder={en.book.title}
+                            state={errors && errors.title ? ERROR : NORMAL}
                             onChangeHandler={(title: string) => setTitle(title)}
                             {...field}
                         />
@@ -70,7 +75,7 @@ function NewBookForm(): ReactElement {
             <Button
                 variant="success"
                 type="submit"
-                label="Save new book"
+                label={en.newBook.saveBookCta}
                 onClickHandler={() => handleNewBookkAdd()}
             />
         </form>

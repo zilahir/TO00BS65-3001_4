@@ -1,10 +1,12 @@
 import { ChangeEvent, ReactElement, forwardRef } from 'react'
 import classnames from 'classnames';
 
+import { ERROR, NORMAL } from '../../../utils/consts';
+
 import styles from './Input.module.scss';
 
 type InputType = "text"
-type State = "normal" | "error"
+type State = typeof ERROR | typeof NORMAL
 interface IInput {
     placeHolder: string,
     type?: InputType,
@@ -14,7 +16,7 @@ interface IInput {
     state?: State
 }
 
-function Input({ placeHolder, type, value, onChangeHandler, classNames = [], state = "normal", ...rest}: IInput, ref: any): ReactElement {
+function Input({ placeHolder, type, value, onChangeHandler, classNames = [], state = NORMAL, ...rest}: IInput, ref: any): ReactElement {
     return (
         <div className={styles.inputContainer}>
             <input
