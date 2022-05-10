@@ -12,31 +12,31 @@ import { en } from '../../../../i18n/en';
 import { ERROR, NORMAL } from '../../../../utils/consts';
 
 function NewBookForm(): ReactElement {
-    const [author, setAuthor] = useState<string>("")
-    const [title, setTitle] = useState<string>("")
     const [isSuccess, setIsSuccess] = useState<boolean>(false);
-    const { response, isLoading, fetch } = useApi(apiEndpoints.insertNewBook, {
-        method: "POST",
-        data: {
-            name: title,
-            author
-        }
-    }, false)
-    const { handleSubmit, formState: { errors }, control } = useForm({
+    const { handleSubmit, formState: { errors }, control, getValues } = useForm({
         defaultValues: {
-            title,
-            author,
+            title: "",
+            author: "",
           }
     });
+    const { response, isLoading, fetch } = useApi(apiEndpoints.insertNewBook, {
+        method: "POST",
+    }, false)
 
-    async function handleNewBookkAdd() {
+    async function handleNewBookkAdd(data: any) {
         if (Object.keys(errors).length === 0) {
-            await fetch();
+            await fetch({
+                method: "POST",
+                data: {
+                    name: getValues().title,
+                    author: getValues().author
+                }
+            });
             setIsSuccess(true)
         }
     }
     return (
-        <form onSubmit={handleSubmit(() => handleNewBookkAdd())} className={styles.formContainer}>
+        <form onSubmit={handleSubmit((data) => handleNewBookkAdd(data))} className={styles.formContainer}>
             <div>
                 {errors && errors.author && <Error message={en.newBook.requiredField} />}
                 {isSuccess && <SuccessNotification messages={[...en.newBook.successMessages]} />}
@@ -49,7 +49,6 @@ function NewBookForm(): ReactElement {
                             classNames={[styles.inputContainer]}
                             placeHolder={en.book.author}
                             state={errors && errors.author ? ERROR : NORMAL}
-                            onChangeHandler={(author: string) => setAuthor(author)}
                             {...field}
                         />
                     )}
@@ -66,7 +65,6 @@ function NewBookForm(): ReactElement {
                             classNames={[styles.inputContainer]}
                             placeHolder={en.book.title}
                             state={errors && errors.title ? ERROR : NORMAL}
-                            onChangeHandler={(title: string) => setTitle(title)}
                             {...field}
                         />
                     )}
@@ -76,7 +74,7 @@ function NewBookForm(): ReactElement {
                 variant="success"
                 type="submit"
                 label={en.newBook.saveBookCta}
-                onClickHandler={() => handleNewBookkAdd()}
+                // onClickHandler={() => handleNewBookkAdd()}
             />
         </form>
     )

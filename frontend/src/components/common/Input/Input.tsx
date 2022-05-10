@@ -11,7 +11,7 @@ interface IInput {
     placeHolder: string,
     type?: InputType,
     value: string | undefined,
-    onChangeHandler: (event: string) => void,
+    onChangeHandler?: (event: string) => void,
     classNames?: string[],
     state?: State
 }
@@ -25,7 +25,7 @@ function Input({ placeHolder, type, value, onChangeHandler, classNames = [], sta
                 type={type}
                 placeholder={placeHolder}
                 value={value}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => onChangeHandler(event.target.value)}
+                //onChange={(event: ChangeEvent<HTMLInputElement>) => onChangeHandler(event.target.value)}
                 {...rest}
             />
         </div>

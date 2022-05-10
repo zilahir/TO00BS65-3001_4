@@ -9,7 +9,7 @@ type Variant = "default" | "success" | "error";
 interface IButton {
     label: string
     classNames?: string[],
-    onClickHandler: () => void;
+    onClickHandler?: () => void;
     type: ButtonType;
     variant?: Variant
 }

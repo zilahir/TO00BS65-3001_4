@@ -1,5 +1,15 @@
+@import '../../../styles/variables';
+
 .successNotificationContainer {
     display: flex;
     align-items: center;
-    padding: 8px 12px;
+    padding: 14px 12px;
+    background: rgba($color: $success-green, $alpha: 1.0);
+    width: fit-content;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    p {
+        font-size: 22px;
+    }
 }

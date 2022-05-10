@@ -20,10 +20,10 @@ function useApi(url: string, config = {}, initialFetch = true) {
 
       const source = CancelToken.source();
 
-      function fetch() {
+      function fetch(body = config) {
         return new Promise((resolve, reject) => {
           axiosInstance(url, {
-            ...config,
+            ...body,
             cancelToken: source.token
           })
             .then(response => {

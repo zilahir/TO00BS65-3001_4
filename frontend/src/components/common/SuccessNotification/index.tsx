@@ -5,10 +5,16 @@ interface ISucceedNotification {
 }
 
 
-function SuccessNotification({}: ISucceedNotification) {
+function SuccessNotification({messages}: ISucceedNotification) {
     return (
         <div className={styles.successNotificationContainer}>
-            
+            {
+                messages.map((message) => (
+                    <p key={message.substring(0, 5)}>
+                        {message}
+                    </p>
+                ))
+            }
         </div>
     )
 }
