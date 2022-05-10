@@ -24,7 +24,6 @@ function useApi(url: string, config = {}, initialFetch = true) {
         return new Promise((resolve, reject) => {
           axiosInstance(url, {
             ...body,
-            cancelToken: source.token
           })
             .then(response => {
               setState({ error: undefined, response, isLoading: false });

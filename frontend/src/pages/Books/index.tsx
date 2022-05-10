@@ -2,10 +2,12 @@ import useApi from '../../api/useApi';
 import { apiEndpoints } from '../../api/apiEndpoints';
 
 function Book() {
-    const { response: books, isLoading } = useApi(apiEndpoints.getAllBook, {
+    const { data, isLoading } = useApi(apiEndpoints.getAllBook, {
         method: "GET"
     })
-    return !isLoading && Array.isArray(books) && books.length > 0 ? (
+    // @ts-ignore
+    console.log(data)
+    return !isLoading && data  && Array.isArray(data.books) && data.books.length > 0 ? (
         <p>book</p>
     ) : <p>loading</p>
 }
